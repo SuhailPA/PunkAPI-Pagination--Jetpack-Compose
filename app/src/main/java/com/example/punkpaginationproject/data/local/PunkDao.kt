@@ -2,8 +2,9 @@ package com.example.punkpaginationproject.data.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.punkpaginationproject.data.local.model.PunkRoomDataItem
 
 
 @Dao
@@ -14,4 +15,7 @@ interface PunkDao {
 
     @Query("DELETE FROM punkroomdataitem")
     suspend fun clearDB()
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertPunkItems(list: List<PunkRoomDataItem>)
 }
